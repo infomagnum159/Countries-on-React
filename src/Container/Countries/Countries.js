@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import FullInfo from "../../Components/FullCountry/FullInfo";
-import {COUNTRY_URL, BORDER_URL} from "../../config";
+import {BASE_URL, BORDER_URL } from "../../config";
 import Country from "../../Components/Country/Country";
 import axios from "axios";
 import './Countries.css';
@@ -13,9 +13,10 @@ const Countries = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const countriesResponse = await axios.get(COUNTRY_URL);
+            const countriesResponse = await axios.get(BASE_URL);
             const promises = countriesResponse.data.map(async country => {
                 const countryInfo = BORDER_URL + country.alpha3Code;
+
                 const countryResponse = await axios.get(countryInfo);
                 console.log(countryResponse)
                 return {...country,
@@ -29,7 +30,7 @@ const Countries = () => {
             setCountries(newCountry);
         };
         fetchData().catch(e => console.error(e));
-    }, []);
+    }, [selectedCountry]);
 
 
     return (
@@ -40,6 +41,7 @@ const Countries = () => {
                         <Country
                             name={country.name}
                             key={country.name}
+                            img={country.flag}
                             clicked={() => setSelectedCountry(country)}/>
                     ))}
                 </div>
