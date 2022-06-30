@@ -1,3 +1,2 @@
-export const BASE_URL = 'http://146.185.154.90:8080/restcountries/rest/v2/';
-export const COUNTRY_URL = 'all?fields=name;alpha3Code';
-export const BORDER_URL = 'alpha/';
+export const BASE_URL = 'https://restcountries.com/v2/all';
+export const BORDER_URL = 'https://restcountries.com/v2/alpha/';
